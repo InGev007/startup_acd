@@ -1,13 +1,11 @@
 import socket
 import asyncio
-import time
 
 
 async def client_handle(client):
     loop = asyncio.get_event_loop()
-    s_time = time.time()
     request = None
-    while (request != 'quit') and ((time.time()-s_time) < 180): # Разрыв соединения через 3минуты без сообщений или по команде quit
+    while (request != 'quit'): # Разрыв соединения по команде quit
         request = (await loop.sock_recv(client, 1024)).decode('utf8')
         if request.count("+") == 1:
             temp = request.split("+")
@@ -26,7 +24,6 @@ async def client_handle(client):
         else:
             answer = "I don`t understand you"
         await loop.sock_sendall(client, answer.encode('utf8'))
-        s_time = time.time()
     client.close()
 
 
