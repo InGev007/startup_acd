@@ -22,7 +22,7 @@ async def client_handle(client):
         elif request == "quit":
             answer = "Goodbay!"
         else:
-            answer = "I don`t understand you"
+            answer = "I don`t understand you. Send me 10+21 or 15*12..."
         await loop.sock_sendall(client, answer.encode('utf8'))
     client.close()
 
