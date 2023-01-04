@@ -27,6 +27,10 @@ class Tree:
         else:
             self.id_node = id_node
 
+    def list_insert(self, lst):
+        for n in lst:
+            self.insert(n)
+
     # findval method to compare the id_node with nodes
     def find_value(self, find_val):
         if find_val < self.id_node:
@@ -88,7 +92,7 @@ class Tree:
             return self
 
 
-print("Наполняем и выводим древо")
+print("Наполняем рандомно древо и выводим")
 trees = Tree(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
@@ -101,7 +105,10 @@ trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
-trees.insert(8)
+trees.print_tree()
+print("___________")
+print("Добавляем список и выводим древо")
+trees.list_insert([8,10,12])
 trees.print_tree()
 print("___________")
 print("Поиск элементов в древе")
