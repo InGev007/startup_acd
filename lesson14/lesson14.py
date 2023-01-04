@@ -28,15 +28,16 @@ class Tree:
             self.id_node = id_node
 
     # findval method to compare the id_node with nodes
-    def findval(self, find_val):
+    def find_value(self, find_val):
         if find_val < self.id_node:
             if self.left is None:
-                return str(find_val) + " Not Found"
-            return self.left.findval(find_val)
+                return print(str(find_val) + " Not Found")
+            return self.left.find_value(find_val)
         elif find_val > self.id_node:
             if self.right is None:
-                return str(find_val) + " Not Found"
-            return self.right.findval(find_val)
+                return print(str(find_val) + " Not Found")
+
+            return self.right.find_value(find_val)
         else:
             print(str(self.id_node) + ' is found')
 
@@ -55,47 +56,42 @@ class Tree:
         print(str(self))
 
     def max_value(self):
-        # Найдем крайний левый лист
+        # Найдем крайний правый лист
         while self.right is not None:
             self = self.right
         print(str(self))
 
     # Удаление узла
-    def delete_node(self, id):
-        # Возвращаем, если дерево пустое
-        if self is None:
+    def delete_node(self, id_node):
+
+        if self.id_node is None:
+            return None
+
+        if id_node < self.id_node:
+            self.left = self.left.delete_node(id_node)
             return self
-        # Найдем узел, который нужно удалить
-        if id < self.id_node:
-            self.left = self.delete_node(id)
-        elif id > self.id_node:
-            self.right = self.delete_node(id)
+
+        elif id_node > self.id_node:
+            self.right = self.right.delete_node(id_node)
+            return self
+
+        if self.left is None:
+            return self.right
+
+        elif self.right is None:
+            return self.left
+
         else:
-            # Если у узла только один дочерний узел или вообще их нет        
-            if self.left is None:
-                temp = self.right
-                self = None
-                return temp
-
-            elif self.right is None:
-                temp = self.left
-                self = None
-                return temp
-
-            # Если у узла два дочерних узла,
-            # помещаем центрированного преемника
-            # на место узла, который нужно удалить
-            temp = self.min_value(self.right)
-
-            self.id_node = temp.id_node
-
-            # Удаляем inorder-преемниа
-            self.right = self.delete_node(self.right, temp.id_node)
-        return self
+            min_key = self.right.min_value()
+            self.id_node = min_key
+            self.right = self.right.delete_node(min_key)
+            return self
 
 
-
+print("Наполняем и выводим древо")
 trees = Tree(random.randint(1,50))
+trees.insert(random.randint(1,50))
+trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
@@ -107,7 +103,19 @@ trees.insert(random.randint(1,50))
 trees.insert(random.randint(1,50))
 trees.insert(8)
 trees.print_tree()
-
+print("___________")
+print("Поиск элементов в древе")
+trees.find_value(0)
+trees.find_value(8)
+print("___________")
+print("Поиск минимального значения в древе")
 trees.min_value()
+print("___________")
+print("Поиск максимального значения в древе")
 trees.max_value()
-print(str(trees[]))
+print("___________")
+print("Удаление элемента в древе и вывод древа для проверки")
+trees.delete_node(8)
+trees.print_tree()
+
+
