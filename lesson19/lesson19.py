@@ -10,7 +10,6 @@ with open('cities.csv', newline='') as csvfile:
     for row in reader:
         city_list.append(row)
 
-
 G = nx.Graph()
 for edge in city_list:
     G.add_edge(edge[0], edge[1], weight=int(edge[2]))
