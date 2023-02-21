@@ -1,0 +1,20 @@
+{
+  "categories": [
+    {
+      "title": "Кофе",
+      "courses":
+      [
+        {
+          "title": "Американо",
+          "price": 90,
+          "ingredient list": ["Кофе", "Сахар", "Вода"]
+        },
+        {
+          "title": "Латте",
+          "price": 100,
+          "ingredient list": ["Кофе", "Сливки","Сахар", "Вода"]
+        }
+      ]
+    }
+  ]
+}
